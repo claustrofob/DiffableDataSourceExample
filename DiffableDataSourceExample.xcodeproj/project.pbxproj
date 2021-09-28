@@ -13,6 +13,7 @@
 		8CC8666126FCC71900E54C74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CC8665F26FCC71900E54C74 /* Main.storyboard */; };
 		8CC8666326FCC71C00E54C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CC8666226FCC71C00E54C74 /* Assets.xcassets */; };
 		8CC8666626FCC71C00E54C74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CC8666426FCC71C00E54C74 /* LaunchScreen.storyboard */; };
+		8CC8666E26FCCB8C00E54C74 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8666D26FCCB8C00E54C74 /* ItemCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		8CC8666226FCC71C00E54C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8CC8666526FCC71C00E54C74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8CC8666726FCC71C00E54C74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CC8666D26FCCB8C00E54C74 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				8CC8666226FCC71C00E54C74 /* Assets.xcassets */,
 				8CC8666426FCC71C00E54C74 /* LaunchScreen.storyboard */,
 				8CC8666726FCC71C00E54C74 /* Info.plist */,
+				8CC8666D26FCCB8C00E54C74 /* ItemCell.swift */,
 			);
 			path = DiffableDataSourceExample;
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CC8666E26FCCB8C00E54C74 /* ItemCell.swift in Sources */,
 				8CC8665E26FCC71900E54C74 /* ViewController.swift in Sources */,
 				8CC8665A26FCC71900E54C74 /* AppDelegate.swift in Sources */,
 				8CC8665C26FCC71900E54C74 /* SceneDelegate.swift in Sources */,
