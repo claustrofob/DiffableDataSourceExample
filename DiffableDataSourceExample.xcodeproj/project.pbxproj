@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C141D29270307820083E0AB /* AnyEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C141D28270307820083E0AB /* AnyEquatable.swift */; };
 		8CC8665A26FCC71900E54C74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8665926FCC71900E54C74 /* AppDelegate.swift */; };
 		8CC8665C26FCC71900E54C74 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8665B26FCC71900E54C74 /* SceneDelegate.swift */; };
 		8CC8665E26FCC71900E54C74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8665D26FCC71900E54C74 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C141D28270307820083E0AB /* AnyEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEquatable.swift; sourceTree = "<group>"; };
 		8CC8665626FCC71900E54C74 /* DiffableDataSourceExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiffableDataSourceExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CC8665926FCC71900E54C74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CC8665B26FCC71900E54C74 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				8CC8666426FCC71C00E54C74 /* LaunchScreen.storyboard */,
 				8CC8666726FCC71C00E54C74 /* Info.plist */,
 				8CC8666D26FCCB8C00E54C74 /* ItemCell.swift */,
+				8C141D28270307820083E0AB /* AnyEquatable.swift */,
 			);
 			path = DiffableDataSourceExample;
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 				8CC8666E26FCCB8C00E54C74 /* ItemCell.swift in Sources */,
 				8CC8665E26FCC71900E54C74 /* ViewController.swift in Sources */,
 				8CC8665A26FCC71900E54C74 /* AppDelegate.swift in Sources */,
+				8C141D29270307820083E0AB /* AnyEquatable.swift in Sources */,
 				8CC8665C26FCC71900E54C74 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
