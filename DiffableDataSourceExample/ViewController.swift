@@ -11,7 +11,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var dataSource: DiffableDataSource<Section>!
+    var dataSource: DiffableDataSource<Section, AnyDiffableItem>!
     
     enum Section {
         case simple
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         }
     }
     
-    var data: [SectionModel<Section>] = [
+    var data: [SectionModel<Section, AnyDiffableItem>] = [
         SectionModel(model: .simple, items: [
             AnyDiffableItem(Item(id: 1, title: "first", onSelect: { print("first") })),
             AnyDiffableItem(Item(id: 2, title: "second")),
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         tableView.register(ItemCell.self, forCellReuseIdentifier: "cell")
         tableView.rowHeight = 50
         tableView.delegate = self
-        dataSource = DiffableDataSource<Section>(tableView: tableView)
+        dataSource = DiffableDataSource<Section, AnyDiffableItem>(tableView: tableView)
     }
 
     var counter = 0
@@ -78,24 +78,24 @@ extension ViewController: UITableViewDelegate {
 
 //================================================================
 
-class DiffableDataSource<Section: Hashable>: UITableViewDiffableDataSource<Section, String> {
-    private let dataContainer: DiffableDataSourceDataContainer
+class DiffableDataSource<Section: Hashable, Item: DiffableItem>: UITableViewDiffableDataSource<Section, Item.ID> {
+    private let dataContainer: DiffableDataSourceDataContainer<Item>
     
     init(tableView: UITableView) {
-        let dataContainer = DiffableDataSourceDataContainer()
+        let dataContainer = DiffableDataSourceDataContainer<Item>()
         self.dataContainer = dataContainer
         super.init(tableView: tableView, cellProvider: { [dataContainer] tableView, indexPath, id in
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemCell
-            let item = dataContainer.item(for: id)!.base as! ViewController.Item
+            let item = (dataContainer.item(for: id) as! AnyDiffableItem).base as! ViewController.Item
             cell.label.text = item.title
             return cell
         })
     }
     
-    public func update(with list: [SectionModel<Section>], animate: Bool = true) {
+    public func update(with list: [SectionModel<Section, Item>], animate: Bool = true) {
         let currentSnapshot = snapshot()
-        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
-        let newDataContainer = DiffableDataSourceDataContainer()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item.ID>()
+        let newDataContainer = DiffableDataSourceDataContainer<Item>()
         list.forEach { data in
             snapshot.appendSections([data.model])
             data.items.forEach { item in
@@ -113,7 +113,7 @@ class DiffableDataSource<Section: Hashable>: UITableViewDiffableDataSource<Secti
         apply(snapshot, animatingDifferences: animate)
     }
     
-    public func item(for indexPath: IndexPath) -> AnyDiffableItem? {
+    public func item(for indexPath: IndexPath) -> Item? {
         guard let id = itemIdentifier(for: indexPath) else {
             return nil
         }
@@ -121,30 +121,24 @@ class DiffableDataSource<Section: Hashable>: UITableViewDiffableDataSource<Secti
     }
 }
 
-class DiffableDataSourceDataContainer {
-    public private(set) var data: [String: AnyDiffableItem] = [:]
+class DiffableDataSourceDataContainer<Item: DiffableItem> {
+    public private(set) var data: [Item.ID: Item] = [:]
     
-    public func item(for id: String) -> AnyDiffableItem? {
+    public func item(for id: Item.ID) -> Item? {
         return data[id]
     }
     
-    public func add(item: AnyDiffableItem) {
+    public func add(item: Item) {
         data[item.id] = item
     }
     
-    public func replace(with data: [String: AnyDiffableItem]) {
+    public func replace(with data: [Item.ID: Item]) {
         self.data = data
     }
 }
-
 //================================================================
 
 public protocol DiffableItem: Equatable, Identifiable {}
-
-public struct SectionModel<Section> where Section: Hashable {
-    public let model: Section
-    public var items: [AnyDiffableItem]
-}
 
 public struct AnyDiffableItem: DiffableItem {
     // MARK: - Variables
@@ -160,11 +154,15 @@ public struct AnyDiffableItem: DiffableItem {
         equatable = .init(base)
         id = "\(H.self)_\(base.id)"
     }
-}
-
-extension AnyDiffableItem: Equatable {
+    
     public static func == (lhs: AnyDiffableItem, rhs: AnyDiffableItem) -> Bool {
         lhs.equatable == rhs.equatable
     }
 }
 
+//================================================================
+
+public struct SectionModel<Section: Hashable, Item: DiffableItem> {
+    public let model: Section
+    public var items: [Item]
+}
