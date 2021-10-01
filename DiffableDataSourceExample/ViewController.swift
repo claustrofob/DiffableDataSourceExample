@@ -52,8 +52,11 @@ class ViewController: UIViewController {
     var counter = 0
     
     @IBAction func shuffle(_ sender: Any) {
+        // reload all
 //        data[0].items.shuffle()
 //        dataSource.update(with: data)
+        
+        // raload one
         if counter == 0 {
             counter += 1
             dataSource.update(with: data)
