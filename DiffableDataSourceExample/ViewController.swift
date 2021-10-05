@@ -57,15 +57,32 @@ class ViewController: UIViewController {
 //        dataSource.update(with: data)
         
         // raload one
-        if counter == 0 {
-            counter += 1
-            dataSource.update(with: data)
-        } else {
-            counter += 1
-            var data = self.data
-            data[0].items[2] = AnyDiffableItem(Item(id: 3, title: "third reloaded"))
-            dataSource.update(with: data)
+//        if counter == 0 {
+//            counter += 1
+//            dataSource.update(with: data)
+//        } else {
+//            counter += 1
+//            var data = self.data
+//            data[0].items[2] = AnyDiffableItem(Item(id: 3, title: "third reloaded"))
+//            dataSource.update(with: data)
+//        }
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .spellOut
+    
+        let uniqueIds = Array(Set((1...30).map { _ in Int.random(in: 0...50) }))
+        let items: [AnyDiffableItem] = uniqueIds.map { id in
+            return AnyDiffableItem(
+                Item(
+                    id: id,
+                    title: "\(id) " + (formatter.string(from: NSNumber(value: id)) ?? "")
+                )
+            )
         }
+        let data: [SectionModel<Section, AnyDiffableItem>] = [
+            SectionModel(model: .simple, items: items)
+        ]
+        dataSource.update(with: data)
     }
 }
 
